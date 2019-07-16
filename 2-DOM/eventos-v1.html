@@ -1,0 +1,54 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app">
+    <p>{{ contador }}</p>
+    <button v-on:click="somar">Somar 1</button>
+    <p>{{ contadorDois }}</p>
+    <button v-on:click="somarDois(5, $event)">Somar 5</button>
+    <p v-on:mousemove="atualizarXY">
+        Mouse: {{ x }} e {{ y }}
+        <span v-on:mousemove="parar"> Para com função</span> ou
+        <span v-on:mousemove.stop> Para com .stop</span> ou
+        <span v-on:mousemove.stop.prevent> Para com .stop.prevent</span>
+    </p>
+    <a v-on:click.prevent href="https://www.google.com/">Google</a>
+    <a v-on:click="naoNavegar" href="https://www.google.com/">Google</a>
+    <hr>
+    <input type="text" v-on:keyup="exibirAlerta" placeholder="Qualquer tecla" />
+    <input type="text" v-on:keyup.enter="exibirAlerta" placeholder="Apenas Enter" />
+    <input type="text" v-on:keyup.enter.alt="exibirAlerta" placeholder="Apenas Enter e Alt" />
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            contador: 0,
+            contadorDois: 0,
+            x: 0,
+            y: 0
+        },
+        methods: {
+            somar() {
+                return this.contador++
+            },
+            somarDois(passo, event) {
+                console.log(passo, event)
+                return this.contadorDois += passo
+            },
+            atualizarXY(event) {
+                this.x = event.clientX
+                this.y = event.clientY
+            },
+            parar(e) {
+                e.stopPropagation()
+            },
+            naoNavegar(e) {
+                e.preventDefault()
+            },
+            exibirAlerta() {
+                alert('Estou te alertando!')
+            }
+        }
+    })
+</script>

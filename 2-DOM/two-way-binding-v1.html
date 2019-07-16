@@ -1,0 +1,15 @@
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+<div id="app">
+    <p>{{ texto }}</p>
+    <input type="text" v-model="texto"> <!-- v-model = v-on + v-bind -->
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            texto: 'Texto'
+        }
+    })
+</script>
